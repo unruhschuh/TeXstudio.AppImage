@@ -48,8 +48,10 @@ cd ..
 wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.10.8/texstudio-2.10.8.tar.gz
 tar xfvz texstudio-2.10.8.tar.gz
 cd texstudio2.10.8
+# patch to use fusion style in any case
+sed -i -e 's/\"GTK+\";/\"Fusion\";/g' -e 's/Cleanlooks/Fusion/g' -e 's/Oxygen/Fusion/g' -e 's/Plastique/Fusion/g' configmanager.cpp
 qmake-qt5 texstudio.pro
-make
+make -j 4
 INSTALL_ROOT=/tmp/texstudio
 cd ..
 
@@ -89,12 +91,6 @@ sed -i -e 's/Exec=texstudio %F/Exec=start_texstudio.sh %F/g' -e 's/Icon=texstudi
 cp -R /usr/lib64/qt5/plugins $APP_DIR/usr/lib/qt5/
 cp $APP_DIR/usr/lib/qt5/plugins/platforms/libqxcb.so $APP_DIR/usr/bin/platforms/
 
-set +e
-ldd $APP_DIR/usr/lib/qt5/plugins/platforms/libqxcb.so | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
-ldd $APP_DIR/usr/bin/* | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
-find $APP_DIR/usr/lib -name "*.so*" | xargs ldd | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
-set -e
-
 cp /usr/local/lib/libjpeg.so.8 $APP_DIR/usr/lib
 
 cp $(ldconfig -p | grep libEGL.so.1 | cut -d ">" -f 2 | xargs) $APP_DIR/usr/lib/ # Otherwise F23 cannot load the Qt platform plugin "xcb"
@@ -102,12 +98,20 @@ cp $(ldconfig -p | grep libEGL.so.1 | cut -d ">" -f 2 | xargs) $APP_DIR/usr/lib/
 cp /usr/local/lib/libpoppler-qt5.so.1 $APP_DIR/usr/lib
 #cp /usr/local/lib/libpoppler.so.58 $APP_DIR/usr/lib
 
+
+set +e
+ldd $APP_DIR/usr/lib/qt5/plugins/platforms/libqxcb.so | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
+ldd $APP_DIR/usr/bin/* | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
+find $APP_DIR/usr/lib -name "*.so*" | xargs ldd | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
+set -e
+
+
 # Delete potentially dangerous libraries
 rm -f $APP_DIR/usr/lib/libstdc* $APP_DIR/usr/lib/libgobject* $APP_DIR/usr/lib/libc.so.* || true
 
 # The following are assumed to be part of the base system
 rm -f $APP_DIR/usr/lib/libgtk-x11-2.0.so.0 || true # this prevents Gtk-WARNINGS about missing themes
- rm Ipe.AppDir/usr/lib/libdbus-1.so.3 || true # this prevents '/var/lib/dbus/machine-id' error on fedora 22/23 live cd
+rm -f $APP_DIR/usr/lib/libdbus-1.so.3 || true # this prevents '/var/lib/dbus/machine-id' error on fedora 22/23 live cd
 rm -f $APP_DIR/usr/lib/libcom_err.so.2 || true
 rm -f $APP_DIR/usr/lib/libcrypt.so.1 || true
 rm -f $APP_DIR/usr/lib/libdl.so.2 || true
