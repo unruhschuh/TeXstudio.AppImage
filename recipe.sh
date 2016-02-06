@@ -6,10 +6,12 @@ set -e
 ######################################################
 # install packages
 ######################################################
-sudo yum -y install fontconfig fontconfig-devel openjpeg openjpeg-devel
+sudo yum -y install fontconfig fontconfig-devel openjpeg openjpeg-devel cmake
 sudo yum -y install epel-release
 sudo yum -y install qt5-qtbase-devel qt5-qtbase-gui qt5-qtscript-devel qt5-qtscript qt5-qtsvg-devel qt5-qtsvg qt5-qttools-devel qt5-qttools qt5-qttools-static
 sudo ln -s /usr/bin/moc-qt5 /usr/bin/moc
+sudo yum -y install cmake binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel # AppImageKit dependencies
+
 
 # Need a newer gcc, getting it from Developer Toolset 2
 sudo wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
@@ -44,6 +46,7 @@ cd ..
 # Build TeXstudio
 ######################################################
 wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.10.8/texstudio-2.10.8.tar.gz
+tar xfvz texstudio-2.10.8.tar.gz
 cd texstudio2.10.8
 qmake-qt5 texstudio.pro
 make
