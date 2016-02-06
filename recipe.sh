@@ -38,7 +38,7 @@ unxz poppler-0.40.0.tar.xz
 tar xfv poppler-0.40.0.tar
 cd poppler-0.40.0
 ./configure && make && sudo make install
-cp ../poppler-qt5.pc /tmp
+cp ../../poppler-qt5.pc /tmp
 export PKG_CONFIG_PATH=/tmp
 cd ..
 
@@ -81,7 +81,7 @@ mkdir $APP_DIR/usr/lib
 mkdir $APP_DIR/usr/lib/qt5
 mkdir $APP_DIR/usr/bin/platforms
 
-cp AppImageKit/AppRun $APP_DIR/
+cp build/AppImageKit/AppRun $APP_DIR/
 cp start_texstudio.sh $APP_DIR/usr/bin
 
 cp $APP_DIR/usr/share/icons/hicolor/scalable/apps/texstudio.svg $APP_DIR/
@@ -156,5 +156,5 @@ find $APP_DIR/usr/ -type f -exec sed -i -e 's|/usr/lib|././/lib|g' {} \;
 # Create AppImage
 ######################################################
 # Convert the AppDir into an AppImage
-#AppImageKit/AppImageAssistant.AppDir/package ./$APP_DIR/ ./$APP_IMAGE
+build/AppImageKit/AppImageAssistant.AppDir/package ./$APP_DIR/ ./$APP_IMAGE
 
