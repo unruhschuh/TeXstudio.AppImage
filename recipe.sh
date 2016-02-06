@@ -49,10 +49,11 @@ wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.10.
 tar xfvz texstudio-2.10.8.tar.gz
 cd texstudio2.10.8
 # patch to use fusion style in any case
-sed -i -e 's/\"GTK+\";/\"Fusion\";/g' -e 's/Cleanlooks/Fusion/g' -e 's/Oxygen/Fusion/g' -e 's/Plastique/Fusion/g' configmanager.cpp
+sed -i -e 's/QApplication::setStyle(style)/QApplication::setStyle(\"Fusion\")/g' \
+       -e 's/QApplication::setStyle(newStyle)/QApplication::setStyle(\"Fusion\")/g' configmanager.cpp
 qmake-qt5 texstudio.pro
 make -j 4
-INSTALL_ROOT=/tmp/texstudio
+INSTALL_ROOT=/tmp/texstudio sudo make install
 cd ..
 
 ######################################################
