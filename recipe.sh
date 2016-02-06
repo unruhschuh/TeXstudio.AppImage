@@ -75,15 +75,16 @@ TXS_SOURCE_DIR=build/texstudio2.10.8
 
 mkdir $APP_DIR
 mv /tmp/texstudio/usr $APP_DIR/
+mkdir $APP_DIR/usr/lib
 mkdir $APP_DIR/usr/lib/qt5
+mkdir $APP_DIR/usr/bin/platforms
 
 cp AppImageKit/AppRun $APP_DIR/
+cp start_texstudio.sh $APP_DIR/usr/bin
 
-cp $APP_DIR/usr/share/icons/hicolor/scalable/texstudio.svg $APP_DIR/
+cp $APP_DIR/usr/share/icons/hicolor/scalable/apps/texstudio.svg $APP_DIR/
 cp $APP_DIR/usr/share/applications/texstudio.desktop $APP_DIR/
 sed -i -e 's/Exec=texstudio %F/Exec=start_texstudio.sh %F/g' -e 's/Icon=texstudio/Icon=texstudio.svg/g' $APP_DIR/texstudio.desktop
-
-
 
 cp -R /usr/lib64/qt5/plugins $APP_DIR/usr/lib/qt5/
 cp $APP_DIR/usr/lib/qt5/plugins/platforms/libqxcb.so $APP_DIR/usr/bin/platforms/
@@ -98,6 +99,8 @@ cp /usr/local/lib/libjpeg.so.8 $APP_DIR/usr/lib
 
 cp $(ldconfig -p | grep libEGL.so.1 | cut -d ">" -f 2 | xargs) $APP_DIR/usr/lib/ # Otherwise F23 cannot load the Qt platform plugin "xcb"
 
+cp /usr/local/lib/libpoppler-qt5.so.1 $APP_DIR/usr/lib
+#cp /usr/local/lib/libpoppler.so.58 $APP_DIR/usr/lib
 
 # Delete potentially dangerous libraries
 rm -f $APP_DIR/usr/lib/libstdc* $APP_DIR/usr/lib/libgobject* $APP_DIR/usr/lib/libc.so.* || true
