@@ -1,0 +1,6 @@
+Name: Poppler-Qt5
+Description: Qt5 bindings for poppler
+Version: 0.40.0
+Requires:
+Libs: -L/usr/local/lib -lpoppler-qt5
+Cflags: -I/usr/local/include/poppler/qt5
