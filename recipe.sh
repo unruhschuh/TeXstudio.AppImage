@@ -109,7 +109,10 @@ ldd $APP_DIR/usr/bin/* | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}'
 find $APP_DIR/usr/lib -name "*.so*" | xargs ldd | grep "=>" | awk '{print $3}' | xargs -I '{}' cp -v '{}' $APP_DIR/usr/lib
 set -e
 
-rm -f $APP_DIR/usr/lib/qt5/plugins/platformthemes/libqgtk2.so || true # this prevents "symbol lookup error libunity-gtk-module.so: undefined symbol: g_settings_new" on ubuntu 14.04
+# this prevents "symbol lookup error libunity-gtk-module.so: undefined symbol: g_settings_new" on ubuntu 14.04
+rm -f $APP_DIR/usr/lib/qt5/plugins/platformthemes/libqgtk2.so || true 
+rmdir $APP_DIR/usr/lib/qt5/plugins/platformthemes || true # should be empty after deleting libqgtk2.so
+rm -f $APP_DIR/usr/lib/libgio* || true # these are not needed if we don't use gtk
 
 # Delete potentially dangerous libraries
 rm -f $APP_DIR/usr/lib/libstdc* $APP_DIR/usr/lib/libgobject* $APP_DIR/usr/lib/libc.so.* || true
