@@ -12,7 +12,6 @@ sudo yum -y install qt5-qtbase-devel qt5-qtbase-gui qt5-qtscript-devel qt5-qtscr
 sudo ln -s /usr/bin/moc-qt5 /usr/bin/moc
 sudo yum -y install cmake binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel # AppImageKit dependencies
 
-
 # Need a newer gcc, getting it from Developer Toolset 2
 sudo wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
 sudo yum -y install devtoolset-2-gcc devtoolset-2-gcc-c++ devtoolset-2-binutils
@@ -86,11 +85,11 @@ mkdir $APP_DIR/usr/lib/qt5
 mkdir $APP_DIR/usr/bin/platforms
 
 cp build/AppImageKit/AppRun $APP_DIR/
-cp start_texstudio.sh $APP_DIR/usr/bin
 
 cp $APP_DIR/usr/share/icons/hicolor/scalable/apps/texstudio.svg $APP_DIR/
 cp $APP_DIR/usr/share/applications/texstudio.desktop $APP_DIR/
-sed -i -e 's/Exec=texstudio %F/Exec=start_texstudio.sh %F/g' -e 's/Icon=texstudio/Icon=texstudio.svg/g' $APP_DIR/texstudio.desktop
+#sed -i -e 's/Exec=texstudio %F/Exec=start_texstudio.sh %F/g' -e 's/Icon=texstudio/Icon=texstudio.svg/g' $APP_DIR/texstudio.desktop
+sed -i -e 's/Icon=texstudio/Icon=texstudio.svg/g' $APP_DIR/texstudio.desktop
 
 cp -R /usr/lib64/qt5/plugins $APP_DIR/usr/lib/qt5/
 cp $APP_DIR/usr/lib/qt5/plugins/platforms/libqxcb.so $APP_DIR/usr/bin/platforms/
