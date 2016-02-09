@@ -1,1 +1,25 @@
-= TeXstudio.AppImage
+
+= AppImage for TeXstudio
+
+Here you will find http://appimage.org/[AppImages] for http://www.texstudio.org/[TeXstudio].
+Please let me know if you have any problems with running Ipe using the AppImages offered on this site: thomas.leitz@web.de.
+
+TeXstudio requires LaTeX. It is not included in the AppImage so you need to have a LaTeX distribution installed on your system. You can find informations about LaTeX and how to install it at https://www.tug.org/[www.tug.org].
+
+== Download
+
+* https://bintray.com/unruhschuh/AppImages/TeXstudio/view#files[Download] the latest AppImage 
+* Make the AppImage executable, e.g. in the terminal run `chmod a+x TeXstudio-x.y.z.AppImage`
+
+== How to create an AppImage for TeXstudio
+
+The AppImage is created inside a fresh installation of CentOS 6.7. In order to build the AppImage follow these steps
+
+* Install CentOS 6.7 either on a PC or inside VirtualBox or any other virtualization program. Using 'testappimage' of AppImageKit also works, but there are issues with dbus.
+* Start the Terminal and run `git clone https://github.com/unruhschuh/TeXstudio.AppImage`
+* Change directory with `cd TeXstudio.AppImage`
+* Start compilation and packaging process with `./recipe.sh`. This creates `TeXstudio.AppImage` inside the current directory.
+
+== Known issues
+
+* nothing so far ...
