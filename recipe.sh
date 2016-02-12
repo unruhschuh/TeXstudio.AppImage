@@ -53,7 +53,7 @@ sed -i -e 's/QApplication::setStyle(style)/QApplication::setStyle(\"Fusion\")/g'
        -e 's/QApplication::setStyle(newStyle)/QApplication::setStyle(\"Fusion\")/g' configmanager.cpp
 qmake-qt5 texstudio.pro
 make -j 4
-INSTALL_ROOT=/tmp/texstudio sudo make install
+INSTALL_ROOT=/USR sudo make install
 cd ..
 
 ######################################################
@@ -79,7 +79,7 @@ APP_IMAGE=$APP.AppImage
 TXS_SOURCE_DIR=build/texstudio2.10.8
 
 mkdir $APP_DIR
-mv /tmp/texstudio/usr $APP_DIR/
+mv /USR/usr $APP_DIR/
 mkdir $APP_DIR/usr/lib
 mkdir $APP_DIR/usr/lib/qt5
 mkdir $APP_DIR/usr/bin/platforms
@@ -162,6 +162,8 @@ rm -f $APP_DIR/usr/lib/libz.so.1 || true
 
 # patch hardcoded '/usr/lib' in binaries away
 find $APP_DIR/usr/ -type f -exec sed -i -e 's|/usr/lib|././/lib|g' {} \;
+find $APP_DIR/usr/ -type f -exec sed -i -e 's|/usr/share/texstudio|././/share/texstudio|g' {} \;
+find $APP_DIR/usr/ -type f -exec sed -i -e 's|/USR|././|g' {} \;
 
 ######################################################
 # Create AppImage
