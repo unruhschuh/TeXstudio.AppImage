@@ -6,15 +6,16 @@ set -e
 ######################################################
 # install packages
 ######################################################
-sudo yum -y install fontconfig fontconfig-devel openjpeg openjpeg-devel cmake
-sudo yum -y install epel-release
-sudo yum -y install qt5-qtbase-devel qt5-qtbase-gui qt5-qtscript-devel qt5-qtscript qt5-qtsvg-devel qt5-qtsvg qt5-qttools-devel qt5-qttools qt5-qttools-static
-sudo ln -s /usr/bin/moc-qt5 /usr/bin/moc
-sudo yum -y install cmake binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel # AppImageKit dependencies
+yum -y install fontconfig fontconfig-devel openjpeg openjpeg-devel cmake
+yum -y install wget xz
+yum -y install epel-release
+yum -y install qt5-qtbase-devel qt5-qtbase-gui qt5-qtscript-devel qt5-qtscript qt5-qtsvg-devel qt5-qtsvg qt5-qttools-devel qt5-qttools qt5-qttools-static
+ln -s /usr/bin/moc-qt5 /usr/bin/moc
+yum -y install cmake binutils fuse glibc-devel glib2-devel fuse-devel gcc zlib-devel # AppImageKit dependencies
 
 # Need a newer gcc, getting it from Developer Toolset 2
-sudo wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
-sudo yum -y install devtoolset-2-gcc devtoolset-2-gcc-c++ devtoolset-2-binutils
+wget http://people.centos.org/tru/devtools-2/devtools-2.repo -O /etc/yum.repos.d/devtools-2.repo
+yum -y install devtoolset-2-gcc devtoolset-2-gcc-c++ devtoolset-2-binutils
 source /opt/rh/devtoolset-2/enable
 
 ######################################################
@@ -28,7 +29,7 @@ cd build
 wget http://www.ijg.org/files/jpegsrc.v8d.tar.gz
 tar xfvz jpegsrc.v8d.tar.gz
 cd jpeg-8d
-./configure && make && sudo make install
+./configure && make && make install
 cd ..
 
 # poppler
@@ -36,7 +37,7 @@ wget http://poppler.freedesktop.org/poppler-0.40.0.tar.xz
 unxz poppler-0.40.0.tar.xz
 tar xfv poppler-0.40.0.tar
 cd poppler-0.40.0
-./configure && make && sudo make install
+./configure && make && make install
 cp ../../poppler-qt5.pc /tmp
 export PKG_CONFIG_PATH=/tmp
 cd ..
@@ -53,7 +54,7 @@ sed -i -e 's/QApplication::setStyle(style)/QApplication::setStyle(\"Fusion\")/g'
        -e 's/QApplication::setStyle(newStyle)/QApplication::setStyle(\"Fusion\")/g' configmanager.cpp
 qmake-qt5 texstudio.pro
 make -j 4
-INSTALL_ROOT=/USR sudo make install
+INSTALL_ROOT=/USR make install
 cd ..
 
 ######################################################
