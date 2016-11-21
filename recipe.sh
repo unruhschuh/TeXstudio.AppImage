@@ -44,9 +44,9 @@ cd ..
 ######################################################
 # Build TeXstudio
 ######################################################
-wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.10.8/texstudio-2.10.8.tar.gz
-tar xfvz texstudio-2.10.8.tar.gz
-cd texstudio2.10.8
+wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.11.2/texstudio-2.11.2.tar.gz
+tar xfvz texstudio-2.11.2.tar.gz
+cd texstudio2.11.2
 # patch to use fusion style in any case
 sed -i -e 's/\"GTK+\";/\"Fusion\";/g' -e 's/Cleanlooks/Fusion/g' -e 's/Oxygen/Fusion/g' -e 's/Plastique/Fusion/g' configmanager.cpp
 sed -i -e 's/QApplication::setStyle(style)/QApplication::setStyle(\"Fusion\")/g' \
@@ -63,6 +63,7 @@ if [ ! -d AppImageKit ] ; then
   git clone https://github.com/probonopd/AppImageKit.git
 fi
 cd AppImageKit/
+checkout 28cc61e # Version 5 (release)
 cmake .
 make clean
 make
@@ -76,7 +77,7 @@ cd ..
 APP=TeXstudio
 APP_DIR=$APP.AppDir
 APP_IMAGE=$APP.AppImage
-TXS_SOURCE_DIR=build/texstudio2.10.8
+TXS_SOURCE_DIR=build/texstudio2.11.2
 
 mkdir $APP_DIR
 mv /USR/usr $APP_DIR/
