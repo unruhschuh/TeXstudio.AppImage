@@ -64,7 +64,7 @@ if [ ! -d AppImageKit ] ; then
   git clone https://github.com/probonopd/AppImageKit.git
 fi
 cd AppImageKit/
-checkout 28cc61e # Version 5 (release)
+git checkout 28cc61e # Version 5 (release)
 cmake .
 make clean
 make
