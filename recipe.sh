@@ -9,7 +9,7 @@ set -x
 # install packages
 ######################################################
 yum -y install fontconfig fontconfig-devel openjpeg openjpeg-devel cmake
-yum -y install wget xz
+yum -y install wget xz mesa-libEGL
 yum -y install epel-release
 yum -y install qt5-qtbase-devel qt5-qtbase-gui qt5-qtscript-devel qt5-qtscript qt5-qtsvg-devel qt5-qtsvg qt5-qttools-devel qt5-qttools qt5-qttools-static
 ln -s /usr/bin/moc-qt5 /usr/bin/moc
