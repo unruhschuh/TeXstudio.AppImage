@@ -2,6 +2,8 @@
 
 # Halt on errors
 set -e
+# print commands
+set -x
 
 ######################################################
 # install packages
