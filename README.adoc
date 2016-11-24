@@ -15,6 +15,14 @@ TeXstudio requires LaTeX. It is not included in the AppImage so you need to have
 
 The AppImage is created inside a fresh installation of CentOS 6.7. In order to build the AppImage follow these steps
 
+=== Using Docker
+
+* clone this repo with `git clone https://github.com/unruhschuh/TeXstudio.AppImage`
+* change to the new directory `cd TeXstudio.AppImage`
+* Start compilation and packaging process with `./buildindocker.sh`.
+
+=== Using VirtualBox
+
 * Install CentOS 6.7 either on a PC or inside VirtualBox or any other virtualization program. Using 'testappimage' of AppImageKit also works, but there are issues with dbus.
 * Start the Terminal and run `git clone https://github.com/unruhschuh/TeXstudio.AppImage`
 * Change directory with `cd TeXstudio.AppImage`
