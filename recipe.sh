@@ -47,9 +47,9 @@ cd ..
 ######################################################
 # Build TeXstudio
 ######################################################
-wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.11.2/texstudio-2.11.2.tar.gz
-tar xfvz texstudio-2.11.2.tar.gz
-cd texstudio2.11.2
+wget http://sourceforge.net/projects/texstudio/files/texstudio/TeXstudio%202.12.0/texstudio-2.12.0.tar.gz
+tar xfvz texstudio-2.12.0.tar.gz
+cd texstudio2.12.0
 # patch to use fusion style in any case
 sed -i -e 's/\"GTK+\";/\"Fusion\";/g' -e 's/Cleanlooks/Fusion/g' -e 's/Oxygen/Fusion/g' -e 's/Plastique/Fusion/g' configmanager.cpp
 sed -i -e 's/QApplication::setStyle(style)/QApplication::setStyle(\"Fusion\")/g' \
@@ -80,7 +80,7 @@ cd ..
 APP=TeXstudio
 APP_DIR=$APP.AppDir
 APP_IMAGE=$APP.AppImage
-TXS_SOURCE_DIR=build/texstudio2.11.2
+TXS_SOURCE_DIR=build/texstudio2.12.0
 
 mkdir $APP_DIR
 mv /USR/usr $APP_DIR/
