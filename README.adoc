@@ -2,7 +2,7 @@
 = AppImage for TeXstudio
 
 Here you will find http://appimage.org/[AppImages] for http://www.texstudio.org/[TeXstudio].
-Please let me know if you have any problems with running Ipe using the AppImages offered on this site: thomas.leitz@web.de.
+Please let me know if you have any problems with running TeXstudio using the AppImages offered on this site: thomas.leitz@web.de.
 
 TeXstudio requires LaTeX. It is not included in the AppImage so you need to have a LaTeX distribution installed on your system. You can find informations about LaTeX and how to install it at https://www.tug.org/[www.tug.org].
 
