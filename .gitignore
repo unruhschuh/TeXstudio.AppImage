@@ -1,3 +1,4 @@
 build
 TeXstudio.AppDir
 TeXstudio.AppImage
+*.AppImage
